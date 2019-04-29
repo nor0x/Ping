@@ -1,15 +1,29 @@
 import React from "react";
 
-import './index.css'
+import "./index.css";
 export const Regions = ({ currentRegion, setCurrentRegion }) => {
-  const regions = ["Massachusetts", "California", "arizona"];
+  const regions = [
+    "massachusetts",
+    "california",
+    "arizona",
+    "virginia",
+    "pennsylvania",
+    "nevada",
+    "texas",
+    "montana",
+    "kansas",
+    "ohio",
+    "florida"
+  ];
 
   return (
     <div className="region-contaniner">
       {regions.map((region, index) => (
         <button
           key={`region_button_${index}`}
-          className={`button region-button-style ${region === currentRegion ? "is-dark" : ""}`}
+          className={`button region-button-style ${
+            region === currentRegion ? "is-dark" : ""
+          }`}
           onClick={() => setCurrentRegion(region)}
         >
           {region}

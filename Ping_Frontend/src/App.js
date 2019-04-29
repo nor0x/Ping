@@ -11,16 +11,24 @@ import { Regions } from "./components/regions";
 import { API_BASE_URL } from "./api";
 import { useFetch } from "./hooks";
 
+const INITIAL_REGION = "california";
 function App() {
-  const [pings, isLoading] = useFetch(API_BASE_URL);
   const [isCloseModal, setModalState] = useState(false);
   const [isLogin, setUserStatus] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentRegion, setCurrentRegion] = useState("California");
+  const [currentRegion, setCurrentRegion] = useState(INITIAL_REGION);
+
+  // API call
+  const [pings, isLoading] = useFetch(API_BASE_URL);
+  // const [heatmapData, isHeatmapLoading] = useFetch(
+  //   `${API_BASE_URL}/Heatmap/${currentRegion}`
+  // );
 
   if (isLoading) {
     return <Loading />;
   }
+
+  // console.log(heatmapData);
 
   return (
     <div className="container">

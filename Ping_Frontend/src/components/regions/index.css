@@ -1,8 +1,12 @@
 .region-contaniner {
+  margin: 2em auto;
+  width: calc(100% - 28px);
+  height: 36px;
+  overflow-x: scroll;
   text-align: center;
-  margin: 2em;
 }
 
 .region-button-style {
   margin: 0px 6px;
+  display: inline-block;
 }
