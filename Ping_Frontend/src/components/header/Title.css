@@ -1,0 +1,12 @@
+.title {
+  margin: 40px;
+}
+
+.title-logo {
+  margin: auto;
+  text-align: center;
+}
+
+.title-logo img {
+  width: 240px;
+}

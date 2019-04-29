@@ -1,0 +1,6 @@
+.map {
+  margin: auto;
+  width: calc(100% - 48px);
+  height: 480px;
+  background-color: lightgray;
+}
