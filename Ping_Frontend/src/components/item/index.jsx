@@ -3,7 +3,7 @@ import React from "react";
 import "./index.css";
 
 export const Item = ({ item, index }) => {
-  const { id, title, description, timestamp } = item;
+  const { id, title, description, category, timestamp } = item;
 
   const handleOpenMapButton = e => {
     e.preventDefault();
@@ -21,6 +21,7 @@ export const Item = ({ item, index }) => {
       <td>{title}</td>
       <td>{description}</td>
       <td>{timestamp}</td>
+      <td className="is-active">{category}</td>
       <td>
         <a href="#" className="button is-primary" onClick={handleOpenMapButton}>
           <span>Open Map</span>

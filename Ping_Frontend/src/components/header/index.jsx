@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { Title } from './Title'
-import { SubTitle } from './SubTitle'
-import { CreateIssueButton } from './CreateIssueButton'
+import { Title } from "./Title";
+import { SubTitle } from "./SubTitle";
+import { CreateIssueButton } from "./CreateIssueButton";
 
-import './index.css'
+import "./index.css";
 
-export const Header = () => (
+export const Header = ({ setModalState }) => (
   <header className="heading">
     <Title />
     <SubTitle />
-    <CreateIssueButton />
+    <CreateIssueButton setModalState={setModalState} />
   </header>
-)
+);

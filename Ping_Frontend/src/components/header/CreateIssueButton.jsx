@@ -2,10 +2,10 @@ import React from "react";
 
 import "./CreateIssueButton.css";
 
-export const CreateIssueButton = () => {
+export const CreateIssueButton = ({ setModalState }) => {
   const handleClick = e => {
     e.preventDefault();
-    console.log(`Click create issue button`);
+    setModalState(true);
   };
 
   return (
