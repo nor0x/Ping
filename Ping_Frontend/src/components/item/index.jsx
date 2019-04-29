@@ -3,7 +3,7 @@ import React from "react";
 import "./index.css";
 
 export const Item = ({ item, index, setCurrentIndex, dataset }) => {
-  const { id, title, description, category } = item;
+  const { id, title, description, category, status, tags } = item;
 
   const handleClickItem = () => {
     const index = dataset.indexOf(dataset.filter(data => data.id === id)[0]);
@@ -18,6 +18,19 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
     e.preventDefault();
   };
 
+  const getTagByStatus = () => {
+    switch (status) {
+      case "red":
+        return <span className="tag is-danger">Red</span>;
+      case "orange":
+        return <span className="tag is-warning">Orange</span>;
+      case "green":
+        return <span className="tag is-success">Green</span>;
+      default:
+        return <span className="tag">Normal</span>;
+    }
+  };
+
   return (
     <tr className="item-default" onClick={handleClickItem}>
       <td>{index}</td>
@@ -27,12 +40,16 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
         <div className="tags has-addons">
           <span className="tag">category</span>
           <span className="tag is-primary">{category}</span>
+          {tags && tags.map(tag => (
+            <span className="tag is-info">{tag}</span>
+          ))}
         </div>
       </td>
+      <td>{getTagByStatus()}</td>
       <td>
-        <a href="#" className="button is-info" onClick={handleDetailButton}>
-          <span>Detail</span>
-        </a>
+        <span className="tag is-link" onClick={handleDetailButton}>
+          Detail
+        </span>
       </td>
     </tr>
   );
