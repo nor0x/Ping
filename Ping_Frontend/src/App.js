@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Header } from "./components/header";
-import { MapContainer } from "./containers/map";
-import { ContentsContainer } from "./containers/contents";
+import { MapContainer } from "./components/map";
+import { ContentsContainer } from "./components/contents";
 import { Footer } from "./components/footer";
 import { Loading } from "./components/loading";
 import { SubmitModal } from "./components/submit-modal";
 import { Regions } from "./components/regions";
 
-import { API_BASE_URL } from "./api";
+import { API_BASE_URL, API_HEATMAP_URL } from "./api";
 import { useFetch } from "./hooks";
 
 const INITIAL_REGION = "california";
 function App() {
+  // container
   const [isCloseModal, setModalState] = useState(false);
   const [isLogin, setUserStatus] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,15 +21,13 @@ function App() {
 
   // API call
   const [pings, isLoading] = useFetch(API_BASE_URL);
-  // const [heatmapData, isHeatmapLoading] = useFetch(
-  //   `${API_BASE_URL}/Heatmap/${currentRegion}`
-  // );
+  const [heatmapData, isHeatmapLoading] = useFetch(
+    `${API_HEATMAP_URL}/${currentRegion}`
+  );
 
-  if (isLoading) {
+  if (isLoading || isHeatmapLoading) {
     return <Loading />;
   }
-
-  // console.log(heatmapData);
 
   return (
     <div className="container">
@@ -48,6 +47,7 @@ function App() {
         mapElement={<div style={{ height: `100%` }} />}
         pings={pings}
         currentIndex={currentIndex}
+        heatmapData={heatmapData}
       />
       <ContentsContainer dataset={pings} setCurrentIndex={setCurrentIndex} />
       <SubmitModal isCloseModal={isCloseModal} setModalState={setModalState} />

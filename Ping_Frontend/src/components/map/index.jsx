@@ -1,43 +1,41 @@
 /* eslint-disable no-undef */
 
 import React from "react";
-import { compose, withProps, withHandlers } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
+import { compose, withProps } from "recompose";
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Polygon
+} from "react-google-maps";
 import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
+import HeatmapLayer from "react-google-maps/lib/components/visualization/HeatmapLayer";
 
 import "./index.css";
 
 export const MapContainer = compose(
   withProps({
     googleMapURL:
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJpMlKrjQ6G9Jf7I8jp1RObNp4C7LvRJc&v=3.exp&libraries=geometry,drawing,places",
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyCJpMlKrjQ6G9Jf7I8jp1RObNp4C7LvRJc&v=3.exp&libraries=geometry,drawing,places,visualization",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ margin: `32px 0px`, height: `100%` }} />
   }),
-  withHandlers(() => {
-    const refs = {
-      map: undefined
-    };
-
-    return {
-      onMapMounted: () => ref => {
-        refs.map = ref;
-        console.log(refs.map);
-      },
-      onZoomChanged: ({ onZoomChange }) => () => {
-        onZoomChange(refs.map.getZoom());
-      }
-    };
-  }),
   withScriptjs,
   withGoogleMap
 )(props => {
-  const { pings, currentIndex } = props;
+  const { pings, currentIndex, heatmapData } = props;
   const targetPos = {
     lat: pings[currentIndex].latitude,
     lng: pings[currentIndex].longitude
   };
+  console.log(`in map`);
+  console.log(heatmapData);
+  const { bounds, color } = heatmapData
+
+  const heatmaps = bounds.map(
+    d => new google.maps.LatLng(d.item1, d.item2)
+  );
 
   return (
     <GoogleMap
@@ -49,7 +47,7 @@ export const MapContainer = compose(
         zoomControl: false,
         rotateControl: false,
         fullscreenControl: false,
-        keyboardShortcuts: false,
+        keyboardShortcuts: false
       }}
     >
       {pings.map((ping, index) => (
@@ -62,6 +60,14 @@ export const MapContainer = compose(
           <div className={`marker marker_${ping.status}`} />
         </MarkerWithLabel>
       ))}
+      <Polygon
+        path={heatmaps}
+        options={{
+          fillColor: color || "#FF0000",
+          strokeColor: color || "#FF0000"
+        }}
+      />
+      <HeatmapLayer data={heatmaps} />
     </GoogleMap>
   );
 });
