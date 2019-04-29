@@ -20,11 +20,11 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
 
   const getTagByStatus = () => {
     switch (status) {
-      case "red":
+      case "open":
         return <span className="tag is-danger">Red</span>;
-      case "orange":
+      case "in-progress":
         return <span className="tag is-warning">Orange</span>;
-      case "green":
+      case "close":
         return <span className="tag is-success">Green</span>;
       default:
         return <span className="tag">Normal</span>;

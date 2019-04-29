@@ -7,17 +7,17 @@
   box-shadow: 0 0 20px 0 red;
 }
 
-.marker_red {
+.marker_open {
   background-color: red;
   box-shadow: 0 0 20px 0 red;
 }
 
-.marker_orange {
+.marker_in-progress {
   background-color: orange;
   box-shadow: 0 0 20px 0 orange;
 }
 
-.marker_green {
+.marker_close {
   background-color: greenyellow;
   box-shadow: 0 0 20px 0 greenyellow;
 }
