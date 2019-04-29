@@ -22,7 +22,8 @@ function App() {
   // API call
   const [pings, isLoading] = useFetch(API_BASE_URL);
   const [heatmapData, isHeatmapLoading] = useFetch(
-    `${API_HEATMAP_URL}/${currentRegion}`
+    `${API_HEATMAP_URL}/${currentRegion}`,
+    currentRegion,
   );
 
   if (isLoading || isHeatmapLoading) {
