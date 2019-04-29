@@ -42,10 +42,7 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
           <span className="tag is-primary">{category}</span>
           {tags &&
             tags.map((tag, index) => (
-              <span
-                key={`item_tag_${index}`}
-                className="tag is-info is-rounded tag-style"
-              >
+              <span key={`item_tag_${index}`} className="tag is-info tag-style">
                 {tag}
               </span>
             ))}

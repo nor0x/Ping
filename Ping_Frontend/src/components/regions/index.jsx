@@ -5,13 +5,8 @@ export const Regions = ({ currentRegion, setCurrentRegion }) => {
   const regions = [
     "massachusetts",
     "california",
-    "arizona",
     "virginia",
-    "pennsylvania",
-    "nevada",
     "texas",
-    "montana",
-    "kansas",
     "ohio",
     "florida"
   ];

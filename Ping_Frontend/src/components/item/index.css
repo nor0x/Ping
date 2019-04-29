@@ -5,8 +5,9 @@
 
 .tag-style {
   display: inline-block;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: 2px !important;
+  margin-right: 2px !important;
+  border-radius: 12px !important;
 }
 
 .tag-default {
