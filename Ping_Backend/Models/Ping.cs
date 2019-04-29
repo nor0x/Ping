@@ -9,6 +9,7 @@ namespace Ping_Backend.Models
         public DateTime TimeStamp { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public string[] Media { get; set; }
 
         public Ping()
         {
