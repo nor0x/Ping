@@ -7,6 +7,7 @@ namespace Ping_Backend.Models
     {
         public string Id { get; set; }
         public List<(double lat, double lng)> Bounds { get; set; }
+        public string Title { get; set; }
         public string Color { get; set; }
 
         public Heatmap()

@@ -17,7 +17,7 @@ namespace Ping_Backend.Controllers
 
         // GET api/heatmap/newyork
         [HttpGet("{name}")]
-        public List<(double lat, double lng)> Get(string name)
+        public Heatmap Get(string name)
         {
             return HeatmapService.GetHeatmap(name);
         }

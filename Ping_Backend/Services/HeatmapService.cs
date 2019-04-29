@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using GeoJSON.Net.Geometry;
 using Newtonsoft.Json;
+using Ping_Backend.Models;
 
 namespace Ping_Backend.Services
 {
     public static class HeatmapService
     {
-        static HeatmapService()
-        { 
+        static List<UnemploymentData> _unemploymentData;
 
+        static HeatmapService()
+        {
+            var pov = System.IO.File.ReadAllText(@"./Data/UnemploymentRate.json");
+            _unemploymentData = UnemploymentData.FromJson(pov);
         }
 
-        public static List<(double lat, double lng)> GetHeatmap(string name)
+        public static Heatmap GetHeatmap(string name)
         {
             var states = System.IO.File.ReadAllText(@"./Data/states.json");
             var data = JsonConvert.DeserializeObject<GeoJSON.Net.Feature.FeatureCollection>(states);
@@ -42,7 +46,15 @@ namespace Ping_Backend.Services
                     {
                         result.Add((c.Latitude, c.Longitude)); 
                     }
-                    return result;
+                    var resultMap = new Heatmap();
+                    resultMap.Bounds = result;
+                    var dataset = _unemploymentData.FirstOrDefault(u => u.AreaName.ToLower() == name.ToLower());
+                    if (dataset != null)
+                    {
+                        resultMap.Title = "Unemployment Rate in " + dataset.AreaName + " " + dataset.UnemploymentRate + "%";
+                        resultMap.Color = ColorService.GetColorByRate(dataset.UnemploymentRate);
+                        return resultMap;
+                    }
                 }
             }
             return null;

@@ -21,9 +21,5 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Data\gz_2010_us_040_00_5m.json" />
-    <Content Remove="Data\states.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\gz_2010_us_050_00_5m.json" />
   </ItemGroup>
 </Project>
