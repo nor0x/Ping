@@ -3,7 +3,7 @@ import React from "react";
 import "./index.css";
 
 export const Item = ({ item, index, setCurrentIndex, dataset }) => {
-  const { id, title, description, category, status, tags } = item;
+  const { id, pingIndex, title, description, category, status, tags } = item;
 
   const handleClickItem = () => {
     const index = dataset.indexOf(dataset.filter(data => data.id === id)[0]);
@@ -33,7 +33,7 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
 
   return (
     <tr className="item-default" onClick={handleClickItem}>
-      <td>{index}</td>
+      <td>{pingIndex}</td>
       <td>{title}</td>
       <td>
         {description}
@@ -42,7 +42,12 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
           <span className="tag is-primary">{category}</span>
           {tags &&
             tags.map((tag, index) => (
-              <span key={`item_tag_${index}`} className="tag is-info is-rounded tag-style">{tag}</span>
+              <span
+                key={`item_tag_${index}`}
+                className="tag is-info is-rounded tag-style"
+              >
+                {tag}
+              </span>
             ))}
         </div>
       </td>

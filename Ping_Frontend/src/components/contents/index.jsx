@@ -8,7 +8,13 @@ export const ContentsContainer = ({ dataset, setCurrentIndex }) => {
       <table className="table is-hoverable is-fullwidth">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>
+              PI
+              <br />
+              <span className="tag tooltip" data-tooltip="Tooltip Text">
+                Ping Index
+              </span>
+            </th>
             <th>Title</th>
             <th>Description</th>
             <th>Status</th>
