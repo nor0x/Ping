@@ -11,11 +11,13 @@ namespace Ping_Backend.Models
         public double Longitude { get; set; }
         public string[] Media { get; set; }
         public string Category { get; set; }
-
+        public string[] Tags { get; set; }
+        public string Status { get; set; }
         public Ping()
         {
             Id = Guid.NewGuid().ToString();
             TimeStamp = DateTime.Now;
+            Status = "open";
         }
     }
 }

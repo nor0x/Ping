@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LiteDB;
 using Ping_Backend.Models;
 
@@ -35,10 +36,13 @@ namespace Ping_Backend.Services
             return pings.FindAll();
         }
 
-        public static void AddPing(Ping ping)
+        public static async Task<Ping> AddPing(Ping ping)
         {
+            var tags = await NLPService.GetCategoriesFromTextAsync(ping.Description);
+            ping.Tags = tags.ToArray();
             var pings = DB.GetCollection<Ping>("pings");
             pings.Insert(ping);
+            return ping;
         }
 
         public static void UpdatePing(Ping ping)

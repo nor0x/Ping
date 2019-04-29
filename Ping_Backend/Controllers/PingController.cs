@@ -28,9 +28,9 @@ namespace Ping_Backend.Controllers
 
         // POST api/ping
         [HttpPost]
-        public void Post([FromBody] Ping value)
+        public Task<Ping> Post([FromBody] Ping value)
         {
-            DatabaseService.AddPing(value);
+            return DatabaseService.AddPing(value);
         }
 
         // PUT api/ping/5
