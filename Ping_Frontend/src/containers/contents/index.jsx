@@ -9,7 +9,7 @@ export const ContentsContainer = ({ dataset }) => {
         <thead />
         <tbody>
           {dataset.map((item, index) => (
-            <Item key={item.id} item={item} index={index}/>
+            <Item key={item.id} item={item} index={dataset.length - index} />
           ))}
         </tbody>
       </table>
