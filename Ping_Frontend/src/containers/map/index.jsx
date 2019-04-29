@@ -44,6 +44,13 @@ export const MapContainer = compose(
       defaultZoom={2}
       defaultCenter={{ lat: 37.33939, lng: -121.89496 }}
       ref={map => map && map.panTo(targetPos)}
+      options={{
+        streetViewControl: false,
+        zoomControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+        keyboardShortcuts: false,
+      }}
     >
       {pings.map((ping, index) => (
         <MarkerWithLabel

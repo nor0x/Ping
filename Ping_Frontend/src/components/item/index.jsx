@@ -40,9 +40,10 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
         <div className="tags has-addons">
           <span className="tag">category</span>
           <span className="tag is-primary">{category}</span>
-          {tags && tags.map(tag => (
-            <span className="tag is-info">{tag}</span>
-          ))}
+          {tags &&
+            tags.map(tag => (
+              <span className="tag is-info is-rounded">{tag}</span>
+            ))}
         </div>
       </td>
       <td>{getTagByStatus()}</td>

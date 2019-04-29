@@ -11,7 +11,7 @@ export const ContentsContainer = ({ dataset, setCurrentIndex }) => {
             <th>ID</th>
             <th>Title</th>
             <th>Description</th>
-            <th />
+            <th>Status</th>
             <th />
           </tr>
         </thead>
