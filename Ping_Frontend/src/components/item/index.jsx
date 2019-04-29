@@ -1,23 +1,23 @@
 import React from "react";
 
-import './index.css'
+import "./index.css";
 
-export const Item = ({ item }) => {
+export const Item = ({ item, index }) => {
   const { id, title, description, timestamp } = item;
 
   const handleOpenMapButton = e => {
     e.preventDefault();
-    console.log(`click open map bbutton`);
+    console.log(`click open map button: ${id}`);
   };
 
-  const handleDetailButton = (e) => {
+  const handleDetailButton = e => {
     e.preventDefault();
-    console.log(`click detail button`);
+    console.log(`click detail button: ${id}`);
   };
 
   return (
     <tr className="item-default">
-      <th>{id}</th>
+      <th>{index}</th>
       <td>{title}</td>
       <td>{description}</td>
       <td>{timestamp}</td>

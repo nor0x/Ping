@@ -3,9 +3,19 @@ import React from "react";
 import { Header } from "./components/header";
 import { MapContainer } from "./containers/map";
 import { ContentsContainer } from "./containers/contents";
-import { Footer } from './components/footer'
+import { Footer } from "./components/footer";
+import { Loading } from "./components/loading";
+
+import { API_BASE_URL } from "./api";
+import { useFetch } from "./hooks";
 
 function App() {
+  const [pings, isLoading] = useFetch(API_BASE_URL);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className="container">
       <Header />
@@ -15,7 +25,7 @@ function App() {
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
-      <ContentsContainer />
+      <ContentsContainer dataset={pings} />
       <Footer />
     </div>
   );
