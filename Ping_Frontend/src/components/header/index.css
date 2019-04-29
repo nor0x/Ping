@@ -1,0 +1,4 @@
+.heading {
+  margin: auto;
+  width: calc(100% - 28px)
+}
