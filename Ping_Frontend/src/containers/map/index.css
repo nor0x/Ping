@@ -1,6 +1,20 @@
-.map {
-  margin: auto;
-  width: calc(100% - 48px);
-  height: 480px;
-  background-color: lightgray;
+.marker {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #A4DE02;
+  animation: ripple infinite 1.2s;
+  box-shadow: 0 0 20px 0 #A4DE02;
+}
+
+@keyframes ripple {
+  from {
+    opacity: 1;
+    transform: scale3d(0.75,0.75,1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(1.5,1.5,1);
+  }
 }
