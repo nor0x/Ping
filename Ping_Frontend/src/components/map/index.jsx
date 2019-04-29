@@ -29,8 +29,6 @@ export const MapContainer = compose(
     lat: pings[currentIndex].latitude,
     lng: pings[currentIndex].longitude
   };
-  console.log(`in map`);
-  console.log(heatmapData);
   const { bounds, color } = heatmapData
 
   const heatmaps = bounds.map(
