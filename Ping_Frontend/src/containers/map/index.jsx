@@ -2,11 +2,7 @@
 
 import React from "react";
 import { compose, withProps } from "recompose";
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-} from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
 
 import "./index.css";
@@ -34,7 +30,7 @@ export const MapContainer = compose(
           opacity={0}
           labelAnchor={new google.maps.Point(18, 20)}
         >
-          <div className="marker" />
+          <div className={`marker marker_${ping.status}`} />
         </MarkerWithLabel>
       ))}
     </GoogleMap>

@@ -2,9 +2,24 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: red;
   animation: ripple infinite 1.2s;
+  background-color: red;
   box-shadow: 0 0 20px 0 red;
+}
+
+.marker_red {
+  background-color: red;
+  box-shadow: 0 0 20px 0 red;
+}
+
+.marker_orange {
+  background-color: orange;
+  box-shadow: 0 0 20px 0 orange;
+}
+
+.marker_green {
+  background-color: greenyellow;
+  box-shadow: 0 0 20px 0 greenyellow;
 }
 
 @keyframes ripple {
