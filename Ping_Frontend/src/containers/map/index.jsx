@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import React from "react";
-import { compose, withProps } from "recompose";
+import { compose, withProps, withHandlers } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
 
@@ -15,9 +15,31 @@ export const MapContainer = compose(
     containerElement: <div style={{ height: `400px` }} />,
     mapElement: <div style={{ margin: `32px 0px`, height: `100%` }} />
   }),
+  withHandlers(() => {
+    const refs = {
+      map: undefined,
+    }
+
+    return {
+      onMapMounted: () => ref => {
+        refs.map = ref
+        console.log(refs.map)
+      },
+      onZoomChanged: ({ onZoomChange }) => () => {
+        onZoomChange(refs.map.getZoom())
+      }
+    }
+  }),
   withScriptjs,
-  withGoogleMap
-)(({ pings }) => {
+  withGoogleMap,
+)(props => {
+  const { pings, currentIndex } = props;
+  const targetPos = {
+    lat: pings[currentIndex].latitude,
+    lng: pings[currentIndex].longitude
+  };
+  console.log(targetPos);
+
   return (
     <GoogleMap
       defaultZoom={2}

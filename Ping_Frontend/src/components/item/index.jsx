@@ -2,32 +2,32 @@ import React from "react";
 
 import "./index.css";
 
-export const Item = ({ item, index }) => {
-  const { id, title, description, category, timestamp } = item;
+export const Item = ({ item, index, setCurrentIndex, dataset }) => {
+  const { id, title, description, category } = item;
 
-  const handleOpenMapButton = e => {
-    e.preventDefault();
-    console.log(`click open map button: ${id}`);
+  const handleClickItem = () => {
+    const index = dataset.indexOf(dataset.filter(data => data.id === id)[0]);
+
+    if (index < 0) {
+      return;
+    }
+    setCurrentIndex(index);
   };
 
   const handleDetailButton = e => {
     e.preventDefault();
-    console.log(`click detail button: ${id}`);
   };
 
   return (
-    <tr className="item-default">
+    <tr className="item-default" onClick={handleClickItem}>
       <td>{index}</td>
       <td>{title}</td>
       <td>
         {description}
-        <span className="tag-default tag-title">category</span>
-        <span className="tag-default tag-content">{category}</span>
-      </td>
-      <td>
-        <a href="#" className="button is-primary" onClick={handleOpenMapButton}>
-          <span>Open Map</span>
-        </a>
+        <div className="tags has-addons">
+          <span className="tag">category</span>
+          <span className="tag is-primary">{category}</span>
+        </div>
       </td>
       <td>
         <a href="#" className="button is-info" onClick={handleDetailButton}>
