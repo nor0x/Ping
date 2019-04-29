@@ -10,10 +10,19 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="GeoJSON.Net" Version="1.1.72" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Data\gz_2010_us_040_00_5m.json" />
+    <Content Remove="Data\states.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\gz_2010_us_050_00_5m.json" />
   </ItemGroup>
 </Project>
