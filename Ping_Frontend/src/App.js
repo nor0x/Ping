@@ -13,6 +13,7 @@ import { useFetch } from "./hooks";
 function App() {
   const [pings, isLoading] = useFetch(API_BASE_URL);
   const [isCloseModal, setModalState] = useState(false);
+  const [isLogin, setUserStatus] = useState(false);
 
   if (isLoading) {
     return <Loading />;
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <div className="container">
-      <Header setModalState={setModalState} />
+      <Header isLogin={isLogin} setModalState={setModalState} setUserStatus={setUserStatus} />
       <MapContainer
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: `100%` }} />}
