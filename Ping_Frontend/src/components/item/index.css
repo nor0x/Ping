@@ -2,3 +2,24 @@
 .table th  {
   vertical-align: middle !important;
 }
+
+.tag-style {
+  display: inline-block;
+}
+
+.tag-default {
+  display: inline-block;
+  padding: 0px 4px 1px 8px;
+}
+
+.tag-title {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background-color: #F3F7F8;
+}
+
+.tag-content {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: greenyellow;
+}

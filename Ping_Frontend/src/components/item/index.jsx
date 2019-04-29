@@ -19,9 +19,11 @@ export const Item = ({ item, index }) => {
     <tr className="item-default">
       <th>{index}</th>
       <td>{title}</td>
-      <td>{description}</td>
-      <td>{timestamp}</td>
-      <td className="is-active">{category}</td>
+      <td>
+        {description}
+        <span className="tag-default tag-title">category</span>
+        <span className="tag-default tag-content">{category}</span>
+      </td>
       <td>
         <a href="#" className="button is-primary" onClick={handleOpenMapButton}>
           <span>Open Map</span>
