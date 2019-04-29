@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 
+import * as geoUtils from "../../lib/geoUtils";
+import * as api from "../../api";
+
 import "./index.css";
 
 export const SubmitModal = ({ isCloseModal, setModalState }) => {
   const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("Food");
+  const [address, setAddress] = useState("");
 
   const modalClassName = isCloseModal ? "modal is-active" : "modal";
 
@@ -13,18 +17,36 @@ export const SubmitModal = ({ isCloseModal, setModalState }) => {
     setModalState(false);
   };
 
-  const handleSelect = e => {
-    setCategory(e.target.value);
+  const handleSelect = ({ target }) => {
+    setCategory(target.value);
   };
 
-  const handleSubmit = () => {
-    const payload = {
-      title,
-      contents,
-      category
-    };
+  const handleAddress = ({ target }) => {
+    setAddress(target.value);
+  };
 
-    console.log(payload);
+  const handleSubmit = async () => {
+    try {
+      const latLng = await geoUtils.getLatLng(address);
+      const payload = {
+        title,
+        description,
+        category,
+        ...latLng
+      };
+
+      console.log(payload);
+
+      await api.addPing(payload);
+
+      setTitle("");
+      setDescription("");
+      setAddress("");
+      setCategory("Food");
+      setModalState(false);
+    } catch (e) {
+      throw Error(e);
+    }
   };
 
   return (
@@ -39,19 +61,28 @@ export const SubmitModal = ({ isCloseModal, setModalState }) => {
               className="input"
               type="text"
               placeholder="Title of ping"
-              onChange={setTitle}
+              onChange={({ target }) => setTitle(target.value)}
             />
           </div>
         </div>
 
         <div className="field">
-          <label className="label">Contents</label>
+          <label className="label">Description</label>
+          <textarea
+            className="textarea"
+            placeholder="e.g. Hello world"
+            onChange={({ target }) => setDescription(target.value)}
+          />
+        </div>
+
+        <div className="field">
+          <label className="label">Address</label>
           <div className="control">
             <input
               className="input"
               type="text"
               placeholder="Contents of ping"
-              onChange={setContents}
+              onChange={handleAddress}
             />
           </div>
         </div>
