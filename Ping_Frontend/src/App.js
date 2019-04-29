@@ -27,6 +27,7 @@ function App() {
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
+        pings={pings}
       />
       <ContentsContainer dataset={pings} />
       <SubmitModal isCloseModal={isCloseModal} setModalState={setModalState} />

@@ -4,8 +4,9 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker,
+  Marker
 } from "react-google-maps";
+// import { CustomMarker } from'./custom-marker'
 
 import "./index.css";
 
@@ -19,19 +20,15 @@ export const MapContainer = compose(
   }),
   withScriptjs,
   withGoogleMap
-)(props => (
-  <GoogleMap defaultZoom={14} defaultCenter={{ lat: 37.33939, lng: -121.89496 }}>
-    <Marker
-      position={{ lat: 37.33739, lng: -121.89496 }}
-      onClick={props.onMarkerClick}
-    />
-    <Marker
-      position={{ lat: 37.33939, lng: -121.89696 }}
-      onClick={props.onMarkerClick}
-    />
-    <Marker
-      position={{ lat: 37.33919, lng: -121.89196 }}
-      onClick={props.onMarkerClick}
-    />
-  </GoogleMap>
-));
+)(({ pings }) => {
+  return (
+    <GoogleMap
+      defaultZoom={2}
+      defaultCenter={{ lat: 37.33939, lng: -121.89496 }}
+    >
+      {pings.map((ping, index) => (
+        <Marker key={index} position={{ lat: ping.latitude, lng: ping.longitude }} />
+      ))}
+    </GoogleMap>
+  );
+});
