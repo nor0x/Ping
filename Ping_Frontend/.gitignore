@@ -9,7 +9,8 @@
 /coverage
 
 # production
-/build
+# including build folder for ci/cd static hosting
+# /build
 
 # misc
 .DS_Store
