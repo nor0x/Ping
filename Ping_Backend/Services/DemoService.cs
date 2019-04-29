@@ -16,7 +16,7 @@ namespace Ping_Backend.Services
                 Description = "Est cupidatat in minim nisi veniam mollit. Est exercitation velit aliqua cupidatat ipsum ad culpa reprehenderit sint qui. Pariatur tempor commodo et amet nostrud.",
                 Latitude = 39.290386,
                 Longitude = -76.612190,
-
+                Category = "Food",
             };
             var ping2 = new Ping
             {
@@ -24,6 +24,7 @@ namespace Ping_Backend.Services
                 Description = "Est cupidatat in minim nisi veniam mollit. Est exercitation velit aliqua cupidatat ipsum ad culpa reprehenderit sint qui. Pariatur tempor commodo et amet nostrud.",
                 Latitude = 39.293894,
                 Longitude = -76.601429,
+                Category = "Clean Water",
 
             };
             var ping3 = new Ping
@@ -32,6 +33,7 @@ namespace Ping_Backend.Services
                 Description = "Est cupidatat in minim nisi veniam mollit. Est exercitation velit aliqua cupidatat ipsum ad culpa reprehenderit sint qui. Pariatur tempor commodo et amet nostrud.",
                 Latitude = 39.302396,
                 Longitude = -76.617730,
+                Category = "Electricity",
 
             };
             result.Add(ping1);
