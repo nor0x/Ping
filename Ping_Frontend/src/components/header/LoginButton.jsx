@@ -1,7 +1,7 @@
 import React from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
-import './LoginButton.css'
+import "./LoginButton.css";
 
 export const LoginButton = ({ setUserStatus }) => {
   const responseFacebook = () => {
@@ -16,7 +16,7 @@ export const LoginButton = ({ setUserStatus }) => {
       callback={responseFacebook}
       render={renderProps => (
         <button className="facebook-login-button" onClick={renderProps.onClick}>
-          Loigin with Facebook
+          Login with Facebook
         </button>
       )}
     />
