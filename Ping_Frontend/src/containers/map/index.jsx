@@ -4,7 +4,7 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
+  Marker,
 } from "react-google-maps";
 
 import "./index.css";
@@ -20,7 +20,7 @@ export const MapContainer = compose(
   withScriptjs,
   withGoogleMap
 )(props => (
-  <GoogleMap defaultZoom={8} defaultCenter={{ lat: 37.33939, lng: -121.89496 }}>
+  <GoogleMap defaultZoom={14} defaultCenter={{ lat: 37.33939, lng: -121.89496 }}>
     <Marker
       position={{ lat: 37.33739, lng: -121.89496 }}
       onClick={props.onMarkerClick}

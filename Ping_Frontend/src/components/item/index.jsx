@@ -17,7 +17,7 @@ export const Item = ({ item, index }) => {
 
   return (
     <tr className="item-default">
-      <th>{index}</th>
+      <td>{index}</td>
       <td>{title}</td>
       <td>
         {description}

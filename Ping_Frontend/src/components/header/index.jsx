@@ -10,8 +10,8 @@ import "./index.css";
 export const Header = ({ isLogin, setModalState, setUserStatus }) => (
   <header className="heading">
     <Title />
-    {!isLogin && <LoginButton setUserStatus={setUserStatus} />}
     <SubTitle />
+    {!isLogin && <LoginButton setUserStatus={setUserStatus} />}
     {isLogin && <CreateIssueButton setModalState={setModalState} />}
   </header>
 );
