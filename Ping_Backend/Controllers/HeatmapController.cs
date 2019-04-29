@@ -15,12 +15,11 @@ namespace Ping_Backend.Controllers
     public class HeatmapController : ControllerBase
     {
 
-        // GET api/ping/5
-        [HttpGet("{id}")]
-        public Heatmap Get(string id)
+        // GET api/ping/newyork
+        [HttpGet("{name}")]
+        public List<(double lat, double lng)> Get(string name)
         {
-            HeatmapService.GetHeatmap();
-            return null;
+            return HeatmapService.GetHeatmap(name);
         }
 
     }
