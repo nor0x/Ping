@@ -17,33 +17,33 @@ export const MapContainer = compose(
   }),
   withHandlers(() => {
     const refs = {
-      map: undefined,
-    }
+      map: undefined
+    };
 
     return {
       onMapMounted: () => ref => {
-        refs.map = ref
-        console.log(refs.map)
+        refs.map = ref;
+        console.log(refs.map);
       },
       onZoomChanged: ({ onZoomChange }) => () => {
-        onZoomChange(refs.map.getZoom())
+        onZoomChange(refs.map.getZoom());
       }
-    }
+    };
   }),
   withScriptjs,
-  withGoogleMap,
+  withGoogleMap
 )(props => {
   const { pings, currentIndex } = props;
   const targetPos = {
     lat: pings[currentIndex].latitude,
     lng: pings[currentIndex].longitude
   };
-  console.log(targetPos);
 
   return (
     <GoogleMap
       defaultZoom={2}
       defaultCenter={{ lat: 37.33939, lng: -121.89496 }}
+      ref={map => map && map.panTo(targetPos)}
     >
       {pings.map((ping, index) => (
         <MarkerWithLabel
