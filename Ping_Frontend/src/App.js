@@ -6,6 +6,7 @@ import { ContentsContainer } from "./containers/contents";
 import { Footer } from "./components/footer";
 import { Loading } from "./components/loading";
 import { SubmitModal } from "./components/submit-modal";
+import { Regions } from "./components/regions";
 
 import { API_BASE_URL } from "./api";
 import { useFetch } from "./hooks";
@@ -15,6 +16,7 @@ function App() {
   const [isCloseModal, setModalState] = useState(false);
   const [isLogin, setUserStatus] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentRegion, setCurrentRegion] = useState("California");
 
   if (isLoading) {
     return <Loading />;
@@ -26,6 +28,10 @@ function App() {
         isLogin={isLogin}
         setModalState={setModalState}
         setUserStatus={setUserStatus}
+      />
+      <Regions
+        currentRegion={currentRegion}
+        setCurrentRegion={setCurrentRegion}
       />
       <MapContainer
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
