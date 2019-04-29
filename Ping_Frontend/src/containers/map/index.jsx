@@ -1,12 +1,13 @@
+/* eslint-disable no-undef */
+
 import React from "react";
 import { compose, withProps } from "recompose";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
 } from "react-google-maps";
-// import { CustomMarker } from'./custom-marker'
+import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
 
 import "./index.css";
 
@@ -27,7 +28,14 @@ export const MapContainer = compose(
       defaultCenter={{ lat: 37.33939, lng: -121.89496 }}
     >
       {pings.map((ping, index) => (
-        <Marker key={index} position={{ lat: ping.latitude, lng: ping.longitude }} />
+        <MarkerWithLabel
+          key={index}
+          position={{ lat: ping.latitude, lng: ping.longitude }}
+          opacity={0}
+          labelAnchor={new google.maps.Point(18, 20)}
+        >
+          <div className="marker" />
+        </MarkerWithLabel>
       ))}
     </GoogleMap>
   );

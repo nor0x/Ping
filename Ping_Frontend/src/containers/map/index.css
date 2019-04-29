@@ -1,20 +1,20 @@
 .marker {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: #A4DE02;
+  background-color: red;
   animation: ripple infinite 1.2s;
-  box-shadow: 0 0 20px 0 #A4DE02;
+  box-shadow: 0 0 20px 0 red;
 }
 
 @keyframes ripple {
   from {
     opacity: 1;
-    transform: scale3d(0.75,0.75,1);
+    transform: scale3d(0.25,0.25,1);
   }
 
   to {
     opacity: 0;
-    transform: scale3d(1.5,1.5,1);
+    transform: scale3d(0.8, 0.8, 1);
   }
 }
