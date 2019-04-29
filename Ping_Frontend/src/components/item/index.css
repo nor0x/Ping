@@ -5,6 +5,8 @@
 
 .tag-style {
   display: inline-block;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .tag-default {
