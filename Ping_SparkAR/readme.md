@@ -6,4 +6,4 @@ https://www.facebook.com/fbcameraeffects/testit/2166937016716254/YjdiOWE2MWNmOWN
 
 ![Facebook Target 1 Image](https://github.com/nor0x/Ping/blob/master/Ping_SparkAR/earth-tracker-03.png?raw=true)
 
-![Facebook Target 2 Image](https://github.com/nor0x/Ping/blob/master/Ping_SparkAR/earth-tracker-02.png?raw=true)
+![Facebook Target 2 Image](https://github.com/nor0x/Ping/blob/master/Ping_SparkAR/earth-tracker-02.jpg?raw=true)
