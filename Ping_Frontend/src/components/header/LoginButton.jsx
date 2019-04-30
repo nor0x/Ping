@@ -6,7 +6,6 @@ import "./LoginButton.css";
 export const LoginButton = ({ setUserStatus }) => {
   const responseFacebook = response => {
     console.log(response);
-
     setUserStatus(true);
 
     if (response.status === undefined || response.status === "unknown") {
@@ -20,6 +19,7 @@ export const LoginButton = ({ setUserStatus }) => {
       appId="2322759604680392"
       autoLoad
       callback={responseFacebook}
+      onFailure={responseFacebook}
       render={renderProps => (
         <button className="facebook-login-button" onClick={renderProps.onClick}>
           Login with Facebook
