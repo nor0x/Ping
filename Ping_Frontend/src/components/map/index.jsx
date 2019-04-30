@@ -24,14 +24,18 @@ export const MapContainer = compose(
   withScriptjs,
   withGoogleMap
 )(props => {
-  const { pings, currentIndex, heatmapData } = props;
+  const { pings, currentIndex, heatmapData, currentRegion } = props;
   const targetPos = {
     lat: pings[currentIndex].latitude,
     lng: pings[currentIndex].longitude
   };
-  const { bounds, color } = heatmapData;
+  let heatmapDatas;
 
-  const heatmaps = bounds.map(d => new google.maps.LatLng(d.item1, d.item2));
+  if (heatmapData.length) {
+    heatmapDatas = heatmapData;
+  } else {
+    heatmapDatas = [heatmapData];
+  }
 
   return (
     <GoogleMap
@@ -56,13 +60,18 @@ export const MapContainer = compose(
           <div className={`marker marker_${ping.status}`} />
         </MarkerWithLabel>
       ))}
-      <Polygon
-        path={heatmaps}
-        options={{
-          fillColor: color || "#FF0000",
-          strokeColor: color || "#FF0000"
-        }}
-      />
+      {heatmapDatas.map((data, index) => (
+        <Polygon
+          key={`polygon_${index}`}
+          path={data.bounds.map(
+            bounds => new google.maps.LatLng(bounds.item1, bounds.item2)
+          )}
+          options={{
+            fillColor: data.color || "#FF0000",
+            strokeColor: data.color || "#FF0000"
+          }}
+        />
+      ))}
       {/* <HeatmapLayer data={heatmaps} /> */}
     </GoogleMap>
   );

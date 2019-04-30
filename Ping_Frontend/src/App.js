@@ -42,6 +42,7 @@ function App() {
       <Regions
         currentRegion={currentRegion}
         setCurrentRegion={setCurrentRegion}
+        isHeatmapLoading={isHeatmapLoading}
       />
       <MapContainer
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
@@ -51,6 +52,7 @@ function App() {
         pings={pings}
         currentIndex={currentIndex}
         heatmapData={heatmapData}
+        currentRegion={currentRegion}
       />
       <ContentsContainer
         dataset={pings}
