@@ -69,8 +69,8 @@ export const Item = ({
       <td>
         {description}
         <div className="tags has-addons">
-          <span className="tag">category</span>
-          <span className="tag is-primary">{category}</span>
+          <span className="tag tag-left-style">category</span>
+          <span className="tag tag-right-style is-primary">{category}</span>
           {tags &&
             tags.map((tag, index) => (
               <span key={`item_tag_${index}`} className="tag is-info tag-style">
