@@ -91,23 +91,20 @@ export const Item = ({
               style={{ padding: "12px", textAlign: "center" }}
             >
               <span
-                className="tag is-danger dropdown-item"
+                className="tag is-danger dropdown-item tag-dropdown"
                 onClick={() => handleClickDropItem("open")}
-                style={{ opacity: "0.7" }}
               >
                 Open
               </span>
               <span
-                className="tag is-warning dropdown-item"
+                className="tag is-warning dropdown-item tag-dropdown"
                 onClick={() => handleClickDropItem("in-progress")}
-                style={{ opacity: "0.7" }}
               >
                 Info required
               </span>
               <span
-                className="tag is-success dropdown-item"
+                className="tag is-success dropdown-item tag-dropdown"
                 onClick={() => handleClickDropItem("close")}
-                style={{ opacity: "0.7" }}
               >
                 Approved
               </span>
