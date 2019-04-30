@@ -7,8 +7,8 @@ export const LoginButton = ({ setUserStatus }) => {
   const responseFacebook = response => {
     console.log(response);
     if (!response.status) {
-      console.log('Fail to login')
-      return
+      console.log("Fail to login");
+      return;
     }
     console.log("login success");
     setUserStatus(true);
@@ -19,6 +19,7 @@ export const LoginButton = ({ setUserStatus }) => {
       appId="2322759604680392"
       autoLoad
       callback={responseFacebook}
+      onFailure={responseFacebook}
       render={renderProps => (
         <button className="facebook-login-button" onClick={renderProps.onClick}>
           Login with Facebook
