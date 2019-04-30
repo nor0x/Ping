@@ -24,7 +24,7 @@ function App() {
   const [isLoading, setLoading] = useState(true);
   const [pings, setPings] = useState([]);
 
-  const [heatmapData, setHeatmapData] = useState([]);
+  const [heatmapData, setHeatmapData] = useState({ bounds: [] });
   const [isAllHeatmapLoading, setAllHeatmapLoading] = useState(false);
 
   useEffect(() => {
