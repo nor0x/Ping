@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;
 using Newtonsoft.Json;
 using Ping_Backend.Models;
@@ -10,20 +11,22 @@ namespace Ping_Backend.Services
     public static class HeatmapService
     {
         static List<UnemploymentData> _unemploymentData;
+        static FeatureCollection _data;
 
         static HeatmapService()
         {
             var pov = System.IO.File.ReadAllText(@"./Data/UnemploymentRate.json");
             _unemploymentData = UnemploymentData.FromJson(pov);
+            var states = System.IO.File.ReadAllText(@"./Data/states.json");
+            _data = JsonConvert.DeserializeObject<GeoJSON.Net.Feature.FeatureCollection>(states);
         }
 
         public static Heatmap GetHeatmap(string name)
         {
-            var states = System.IO.File.ReadAllText(@"./Data/states.json");
-            var data = JsonConvert.DeserializeObject<GeoJSON.Net.Feature.FeatureCollection>(states);
+
             object value;
             IGeometryObject geometry = null;
-            foreach (var f in data.Features)
+            foreach (var f in _data.Features)
             {
                 f.Properties.TryGetValue("NAME", out value);
                 if (value != null)

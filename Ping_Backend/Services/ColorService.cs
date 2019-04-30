@@ -6,7 +6,6 @@ namespace Ping_Backend.Services
         public static string GetColorByRate(string rateString)
         {
             var rate = double.Parse(rateString.Replace(",", "."));
-            System.Diagnostics.Debug.WriteLine("rate is: " + rate);
             if (rate <= 4)
             {
                 return "#23d160";
