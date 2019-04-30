@@ -26,6 +26,7 @@ namespace Ping_Backend.Services
                 Latitude = 21.916222,
                 Longitude = 95.955971,
                 Category = "Child Starvation",
+                Status = "in-progress"
 
             };
             var ping3 = new Ping
@@ -35,6 +36,7 @@ namespace Ping_Backend.Services
                 Latitude = 39.302396,
                 Longitude = -76.617730,
                 Category = "Vaccination",
+                Status = "close"
             };
             ping1.Tags = await NLPService.GetCategoriesFromTextAsync(ping1.Description);
             ping2.Tags = await NLPService.GetCategoriesFromTextAsync(ping2.Description);
