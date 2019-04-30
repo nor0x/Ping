@@ -1,4 +1,18 @@
 .heading {
   margin: auto;
-  width: calc(100% - 28px)
+  width: calc(100% - 28px);
+}
+
+.messenger-button {
+  position: fixed;
+  right: 35px;
+  bottom: 35px;
+  width: 35px;
+  transition: all 0.1s ease-in;
+  -webkit-filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.messenger-button:hover {
+  transform: scale(2.2);
 }
