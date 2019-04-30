@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 
+import { changeStatusOfPing } from "../../api";
+
 import "./index.css";
 
-export const Item = ({ item, index, setCurrentIndex, dataset }) => {
+export const Item = ({
+  item,
+  index,
+  setCurrentIndex,
+  dataStatus,
+  setDataStatus,
+  dataset
+}) => {
   const { id, pingIndex, title, description, category, status, tags } = item;
   const [currentStatus, setCurrentStatus] = useState(status);
   const [isDropActive, changeDropActiveStatus] = useState(false);
@@ -24,9 +33,16 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
     changeDropActiveStatus(!isDropActive);
   };
 
-  const handleClickDropItem = status => {
-    setCurrentStatus(status);
-    changeDropActiveStatus(false);
+  const handleClickDropItem = async status => {
+    try {
+      await changeStatusOfPing({ id, status });
+      setCurrentStatus(status);
+      setDataStatus(dataStatus + 1);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      changeDropActiveStatus(false);
+    }
   };
 
   const getTagByStatus = () => {

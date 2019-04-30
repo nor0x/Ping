@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { Header } from "./components/header";
 import { MapContainer } from "./components/map";
@@ -12,18 +12,20 @@ import { API_BASE_URL, API_HEATMAP_URL } from "./api";
 import { useFetch } from "./hooks";
 
 const INITIAL_REGION = "california";
+
 function App() {
   // container
   const [isCloseModal, setModalState] = useState(false);
   const [isLogin, setUserStatus] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentRegion, setCurrentRegion] = useState(INITIAL_REGION);
+  const [dataStatus, setDataStatus] = useState(0);
 
   // API call
-  const [pings, isLoading] = useFetch(API_BASE_URL);
+  const [pings, isLoading] = useFetch(API_BASE_URL, dataStatus);
   const [heatmapData, isHeatmapLoading] = useFetch(
     `${API_HEATMAP_URL}/${currentRegion}`,
-    currentRegion,
+    currentRegion
   );
 
   if (isLoading || isHeatmapLoading) {
@@ -50,7 +52,12 @@ function App() {
         currentIndex={currentIndex}
         heatmapData={heatmapData}
       />
-      <ContentsContainer dataset={pings} setCurrentIndex={setCurrentIndex} />
+      <ContentsContainer
+        dataset={pings}
+        setCurrentIndex={setCurrentIndex}
+        setDataStatus={setDataStatus}
+        dataStatus={dataStatus}
+      />
       <SubmitModal isCloseModal={isCloseModal} setModalState={setModalState} />
       <Footer />
     </div>

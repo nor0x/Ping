@@ -2,7 +2,12 @@ import React from "react";
 
 import { Item } from "../../components/item";
 
-export const ContentsContainer = ({ dataset, setCurrentIndex }) => {
+export const ContentsContainer = ({
+  dataset,
+  setCurrentIndex,
+  setDataStatus,
+  dataStatus
+}) => {
   return (
     <section className="section contents-container">
       <table className="table is-hoverable is-fullwidth">
@@ -29,6 +34,8 @@ export const ContentsContainer = ({ dataset, setCurrentIndex }) => {
               index={dataset.length - index}
               setCurrentIndex={setCurrentIndex}
               dataset={dataset}
+              setDataStatus={setDataStatus}
+              dataStatus={dataStatus}
             />
           ))}
         </tbody>
