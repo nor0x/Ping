@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./index.css";
 
 export const Item = ({ item, index, setCurrentIndex, dataset }) => {
-  const { id, title, description, category, status, tags } = item;
+  const { id, pingIndex, title, description, category, status, tags } = item;
   const [currentStatus, setCurrentStatus] = useState(status);
   const [isDropActive, changeDropActiveStatus] = useState(false);
 
@@ -44,7 +44,7 @@ export const Item = ({ item, index, setCurrentIndex, dataset }) => {
 
   return (
     <tr className="item-default" onClick={handleClickItem}>
-      <td>{index}</td>
+      <td>{pingIndex}</td>
       <td>{title}</td>
       <td>
         {description}
