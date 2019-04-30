@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Header } from "./components/header";
 import { MapContainer } from "./components/map";
@@ -9,7 +9,6 @@ import { SubmitModal } from "./components/submit-modal";
 import { Regions } from "./components/regions";
 
 import { API_BASE_URL, API_HEATMAP_URL } from "./api";
-import { useFetch } from "./hooks";
 
 const INITIAL_REGION = "california";
 
@@ -22,14 +21,37 @@ function App() {
   const [dataStatus, setDataStatus] = useState(0);
 
   // API call
-  const [pings, isLoading] = useFetch(API_BASE_URL, dataStatus);
-  const [heatmapData, isHeatmapLoading] = useFetch(
-    `${API_HEATMAP_URL}/${currentRegion}`,
-    currentRegion
-  );
-  const [allHeatmapData, isAllHeatmapLoading] = useFetch(API_HEATMAP_URL);
+  const [isLoading, setLoading] = useState(true);
+  const [pings, setPings] = useState([]);
 
-  if (isLoading || isHeatmapLoading) {
+  const [heatmapData, setHeatmapData] = useState([]);
+  const [isAllHeatmapLoading, setAllHeatmapLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(API_BASE_URL);
+      const json = await response.json();
+      setPings(json);
+      setLoading(false);
+    };
+    fetchData();
+  }, [dataStatus]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`${API_HEATMAP_URL}/${currentRegion}`);
+      const json = await response.json();
+      setHeatmapData(json);
+      if (currentRegion === "") {
+        setAllHeatmapLoading(false);
+      } else {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [currentRegion]);
+
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -44,6 +66,7 @@ function App() {
         currentRegion={currentRegion}
         setCurrentRegion={setCurrentRegion}
         isAllHeatmapLoading={isAllHeatmapLoading}
+        setAllHeatmapLoading={setAllHeatmapLoading}
       />
       <MapContainer
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
@@ -53,7 +76,7 @@ function App() {
         pings={pings}
         currentIndex={currentIndex}
         heatmapData={heatmapData}
-        allHeatmapData={allHeatmapData}
+        // allHeatmapData={allHeatmapData}
         currentRegion={currentRegion}
       />
       <ContentsContainer

@@ -4,7 +4,8 @@ import "./index.css";
 export const Regions = ({
   currentRegion,
   setCurrentRegion,
-  isAllHeatmapLoading
+  isAllHeatmapLoading,
+  setAllHeatmapLoading
 }) => {
   const regions = [
     "Massachusetts",
@@ -25,7 +26,10 @@ export const Regions = ({
       className={`button region-button-style ${
         currentRegion === "" ? "is-dark" : ""
       }`}
-      onClick={() => setCurrentRegion("")}
+      onClick={() => {
+        setAllHeatmapLoading(true)
+        setCurrentRegion("");
+      }}
     >
       ALL
     </button>
@@ -38,7 +42,9 @@ export const Regions = ({
         <button
           key={`region_button_${index}`}
           className={`button region-button-style ${
-            region === currentRegion ? "is-dark" : ""
+            region.toLocaleLowerCase() === currentRegion.toLocaleLowerCase()
+              ? "is-dark"
+              : ""
           }`}
           onClick={() => setCurrentRegion(region)}
         >

@@ -9,7 +9,6 @@ import {
   Polygon
 } from "react-google-maps";
 import { MarkerWithLabel } from "react-google-maps/lib/components/addons/MarkerWithLabel";
-import HeatmapLayer from "react-google-maps/lib/components/visualization/HeatmapLayer";
 
 import "./index.css";
 
@@ -28,8 +27,6 @@ export const MapContainer = compose(
     pings,
     currentIndex,
     heatmapData,
-    allHeatmapData,
-    currentRegion
   } = props;
   const targetPos = {
     lat: pings[currentIndex].latitude,
@@ -37,8 +34,8 @@ export const MapContainer = compose(
   };
   let heatmapDatas;
 
-  if (currentRegion === "") {
-    heatmapDatas = allHeatmapData;
+  if (heatmapData.length) {
+    heatmapDatas = heatmapData;
   } else {
     heatmapDatas = [heatmapData];
   }
@@ -66,6 +63,7 @@ export const MapContainer = compose(
           <div className={`marker marker_${ping.status}`} />
         </MarkerWithLabel>
       ))}
+
       {heatmapDatas.map((data, index) => (
         <Polygon
           key={`polygon_${index}`}
@@ -78,7 +76,6 @@ export const MapContainer = compose(
           }}
         />
       ))}
-      {/* <HeatmapLayer data={heatmaps} /> */}
     </GoogleMap>
   );
 });
