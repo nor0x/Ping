@@ -19,47 +19,44 @@ namespace Ping_Backend.Services
 
         public static Heatmap GetHeatmap(string name)
         {
-            if (name.Contains(" ") == false)
+            var states = System.IO.File.ReadAllText(@"./Data/states.json");
+            var data = JsonConvert.DeserializeObject<GeoJSON.Net.Feature.FeatureCollection>(states);
+            object value;
+            IGeometryObject geometry = null;
+            foreach (var f in data.Features)
             {
-                var states = System.IO.File.ReadAllText(@"./Data/states.json");
-                var data = JsonConvert.DeserializeObject<GeoJSON.Net.Feature.FeatureCollection>(states);
-                object value;
-                IGeometryObject geometry = null;
-                foreach (var f in data.Features)
+                f.Properties.TryGetValue("NAME", out value);
+                if (value != null)
                 {
-                    f.Properties.TryGetValue("NAME", out value);
-                    if (value != null)
+                    if (value.ToString().ToLower() == name.ToLower())
                     {
-                        if (value.ToString().ToLower() == name.ToLower())
-                        {
-                            geometry = f.Geometry;
-                            break;
-                        }
-                    }
-                }
-                if (geometry != null)
-                {
-                    if (geometry is MultiPolygon mp)
-                    {
-                        var result = new List<(double lat, double lng)>();
-                        var coordinates = mp.Coordinates.LastOrDefault().Coordinates.First().Coordinates;
-                        foreach (var c in coordinates)
-                        {
-                            result.Add((c.Latitude, c.Longitude));
-                        }
-                        var resultMap = new Heatmap();
-                        resultMap.Bounds = result;
-                        var dataset = _unemploymentData.FirstOrDefault(u => u.AreaName.ToLower() == name.ToLower());
-                        if (dataset != null)
-                        {
-                            resultMap.Title = "Unemployment Rate in " + dataset.AreaName + " " + dataset.UnemploymentRate + "%";
-                            resultMap.Color = ColorService.GetColorByRate(dataset.UnemploymentRate);
-                            return resultMap;
-                        }
+                        geometry = f.Geometry;
+                        break;
                     }
                 }
             }
-            return null;
+            if (geometry != null)
+            {
+                if (geometry is MultiPolygon mp)
+                {
+                    var result = new List<(double lat, double lng)>();
+                    var coordinates = mp.Coordinates.LastOrDefault().Coordinates.First().Coordinates;
+                    foreach (var c in coordinates)
+                    {
+                        result.Add((c.Latitude, c.Longitude));
+                    }
+                    var resultMap = new Heatmap();
+                    resultMap.Bounds = result;
+                    var dataset = _unemploymentData.FirstOrDefault(u => u.AreaName.ToLower() == name.ToLower());
+                    if (dataset != null)
+                    {
+                        resultMap.Title = "Unemployment Rate in " + dataset.AreaName + " " + dataset.UnemploymentRate + "%";
+                        resultMap.Color = ColorService.GetColorByRate(dataset.UnemploymentRate);
+                        return resultMap;
+                    }
+                }
+            }
+        return null;
         }
 
         public static List<Heatmap> GetAllHeatmaps()
@@ -68,10 +65,13 @@ namespace Ping_Backend.Services
 
             foreach(var ud in _unemploymentData)
             {
-                var h = GetHeatmap(ud.AreaName);
-                if(h != null)
+                if (!ud.AreaName.Contains(","))
                 {
-                    result.Add(h);
+                    var h = GetHeatmap(ud.AreaName);
+                    if (h != null)
+                    {
+                        result.Add(h);
+                    }
                 }
             }
             return result;

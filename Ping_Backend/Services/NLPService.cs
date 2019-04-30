@@ -23,7 +23,7 @@ namespace Ping_Backend.Services
         }
 
 
-        public static async Task<List<string>> GetCategoriesFromTextAsync(string text)
+        public static async Task<string[]> GetCategoriesFromTextAsync(string text)
         {
             var entitiesResult = await _client.EntitiesAsync(
                     false,
@@ -41,9 +41,17 @@ namespace Ping_Backend.Services
                     result.Add(e.Name);
                 }
             }
-            result.RemoveAt(result.Count() - 1);
+            if (result.Count() != 0)
+            {
+                result.RemoveAt(result.Count() - 1);
+            }
+            if(result.Count() >= 6)
+            {
+                var count = result.Count() - 5;
+                result.RemoveRange(5, count);
+            }
 
-            return result;
+            return result.ToArray();
         }
     }
 

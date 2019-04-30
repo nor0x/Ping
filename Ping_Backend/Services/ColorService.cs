@@ -5,22 +5,23 @@ namespace Ping_Backend.Services
     {
         public static string GetColorByRate(string rateString)
         {
-            var rate = Convert.ToDouble(rateString);
-            if(rate <= 2)
+            var rate = double.Parse(rateString.Replace(",", "."));
+
+            if (rate <= 2)
             {
-                return "#cbf078";
+                return "#23d160";
             }
             else if(rate >= 2 && rate <= 6)
             {
-                return "#f8f398";
+                return "#ffdd57";
             }
             else if(rate >= 6 && rate <= 10)
             {
-                return "#f1b963";
+                return "#d8750d";
             }
             else if(rate >= 10)
             {
-                return "#e46161";
+                return "#ff3860";
             }
             else
             {

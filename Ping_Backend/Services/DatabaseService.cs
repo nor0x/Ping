@@ -16,14 +16,14 @@ namespace Ping_Backend.Services
             Init();
         }
 
-        public static void Init()
+        public async static void Init()
         {
             var pings = DB.GetCollection<Ping>("pings");
             var count = pings.Count(Query.All());
             if (count == 0)
             {
                 // Create your new ping instance
-                var demoData = DemoService.GetBaltimoreDemo();
+                var demoData = await DemoService.GetDemoData();
                 pings.InsertBulk(demoData);
             }
         }
@@ -39,7 +39,7 @@ namespace Ping_Backend.Services
         public static async Task<Ping> AddPing(Ping ping)
         {
             var tags = await NLPService.GetCategoriesFromTextAsync(ping.Description);
-            ping.Tags = tags.ToArray();
+            ping.Tags = tags;
             var pings = DB.GetCollection<Ping>("pings");
             pings.Insert(ping);
             return ping;
@@ -58,6 +58,13 @@ namespace Ping_Backend.Services
             UpdatePing(ping);
         }
 
+        public static void InitialState()
+        {
+            DB.DropCollection("pings");
+            Init();
+        }
+
+
         public static void DeletePing(string id)
         {
             var pings = DB.GetCollection<Ping>("pings");
@@ -66,17 +73,8 @@ namespace Ping_Backend.Services
 
         public static Ping GetPingById(string id)
         {
-            // Get customer collection
             var pings = DB.GetCollection<Ping>("pings");
-            var count = pings.Count(Query.All());
-            if (count == 0)
-            {
-                // Create your new customer instance
-                var demoData = DemoService.GetBaltimoreDemo();
-                pings.InsertBulk(demoData);
-            }
             return pings.FindById(id);
-
         }
     }
 }
