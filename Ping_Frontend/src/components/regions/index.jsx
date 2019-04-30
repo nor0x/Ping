@@ -7,12 +7,12 @@ export const Regions = ({
   isAllHeatmapLoading
 }) => {
   const regions = [
-    "massachusetts",
-    "california",
-    "virginia",
-    "texas",
-    "ohio",
-    "florida"
+    "Massachusetts",
+    "California",
+    "Virginia",
+    "Texas",
+    "Ohio",
+    "Florida"
   ];
 
   const loadingButton = (

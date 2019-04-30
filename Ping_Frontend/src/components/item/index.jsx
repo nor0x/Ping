@@ -48,11 +48,15 @@ export const Item = ({
   const getTagByStatus = () => {
     switch (currentStatus) {
       case "open":
-        return <span className="tag is-danger dropdown-trigger">Red</span>;
+        return <span className="tag is-danger dropdown-trigger">Open</span>;
       case "in-progress":
-        return <span className="tag is-warning dropdown-trigger">Orange</span>;
+        return (
+          <span className="tag is-warning dropdown-trigger">Info required</span>
+        );
       case "close":
-        return <span className="tag is-success dropdown-trigger">Green</span>;
+        return (
+          <span className="tag is-success dropdown-trigger">Approved</span>
+        );
       default:
         return <span className="tag dropdown-trigger">Normal</span>;
     }
@@ -91,21 +95,21 @@ export const Item = ({
                 onClick={() => handleClickDropItem("open")}
                 style={{ opacity: "0.7" }}
               >
-                Red
+                Open
               </span>
               <span
                 className="tag is-warning dropdown-item"
                 onClick={() => handleClickDropItem("in-progress")}
                 style={{ opacity: "0.7" }}
               >
-                Orange
+                Info required
               </span>
               <span
                 className="tag is-success dropdown-item"
                 onClick={() => handleClickDropItem("close")}
                 style={{ opacity: "0.7" }}
               >
-                Green
+                Approved
               </span>
             </div>
           </div>

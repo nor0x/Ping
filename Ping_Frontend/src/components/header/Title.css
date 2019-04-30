@@ -10,3 +10,7 @@
 .title-logo img {
   width: 240px;
 }
+
+.title-image {
+  max-width: 130px;
+}
