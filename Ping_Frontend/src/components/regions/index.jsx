@@ -4,7 +4,7 @@ import "./index.css";
 export const Regions = ({
   currentRegion,
   setCurrentRegion,
-  isHeatmapLoading
+  isAllHeatmapLoading
 }) => {
   const regions = [
     "massachusetts",
@@ -16,7 +16,9 @@ export const Regions = ({
   ];
 
   const loadingButton = (
-    <button className="button region-button-style is-gray">loading</button>
+    <button className="button region-button-style is-gray" disabled={true}>
+      loading
+    </button>
   );
   const allButton = (
     <button
@@ -31,7 +33,7 @@ export const Regions = ({
 
   return (
     <div className="region-contaniner">
-      {isHeatmapLoading ? loadingButton : allButton}
+      {isAllHeatmapLoading ? loadingButton : allButton}
       {regions.map((region, index) => (
         <button
           key={`region_button_${index}`}

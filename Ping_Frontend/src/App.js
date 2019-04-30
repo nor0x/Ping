@@ -27,6 +27,7 @@ function App() {
     `${API_HEATMAP_URL}/${currentRegion}`,
     currentRegion
   );
+  const [allHeatmapData, isAllHeatmapLoading] = useFetch(API_HEATMAP_URL);
 
   if (isLoading || isHeatmapLoading) {
     return <Loading />;
@@ -42,7 +43,7 @@ function App() {
       <Regions
         currentRegion={currentRegion}
         setCurrentRegion={setCurrentRegion}
-        isHeatmapLoading={isHeatmapLoading}
+        isAllHeatmapLoading={isAllHeatmapLoading}
       />
       <MapContainer
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
@@ -52,6 +53,7 @@ function App() {
         pings={pings}
         currentIndex={currentIndex}
         heatmapData={heatmapData}
+        allHeatmapData={allHeatmapData}
         currentRegion={currentRegion}
       />
       <ContentsContainer
