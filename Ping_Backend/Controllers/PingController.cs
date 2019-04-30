@@ -12,35 +12,43 @@ namespace Ping_Backend.Controllers
     [ApiController]
     public class PingController : ControllerBase
     {
-        // GET api/values
+        // GET api/ping
         [HttpGet]
         public IEnumerable<Ping> Get()
         {
             return DatabaseService.GetAllPings();
         }
 
-        // GET api/values/5
+        // GET api/ping/5
         [HttpGet("{id}")]
         public Ping Get(string id)
         {
             return DatabaseService.GetPingById(id);
         }
 
-        // POST api/values
+        // POST api/ping
         [HttpPost]
-        public void Post([FromBody] Ping value)
+        public Task<Ping> Post([FromBody] Ping value)
         {
-            DatabaseService.AddPing(value);
+            return DatabaseService.AddPing(value);
         }
 
-        // PUT api/values/5
+        // PUT api/ping/5
         [HttpPut("{id}")]
         public void Put(string id, [FromBody] Ping value)
         {
             DatabaseService.UpdatePing(value);
         }
 
-        // DELETE api/values/5
+
+        // PUT api/ping/5
+        [HttpPut("{id}/{status}")]
+        public void ChangeStatus(string id, string status)
+        {
+            DatabaseService.UpdatePingStatus(id, status);
+        }
+
+        // DELETE api/ping/5
         [HttpDelete("{id}")]
         public void Delete(string id)
         {

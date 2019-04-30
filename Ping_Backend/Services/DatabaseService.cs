@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LiteDB;
 using Ping_Backend.Models;
 
@@ -15,14 +16,14 @@ namespace Ping_Backend.Services
             Init();
         }
 
-        public static void Init()
+        public async static void Init()
         {
             var pings = DB.GetCollection<Ping>("pings");
             var count = pings.Count(Query.All());
             if (count == 0)
             {
                 // Create your new ping instance
-                var demoData = DemoService.GetBaltimoreDemo();
+                var demoData = await DemoService.GetDemoData();
                 pings.InsertBulk(demoData);
             }
         }
@@ -35,10 +36,13 @@ namespace Ping_Backend.Services
             return pings.FindAll();
         }
 
-        public static void AddPing(Ping ping)
+        public static async Task<Ping> AddPing(Ping ping)
         {
+            var tags = await NLPService.GetCategoriesFromTextAsync(ping.Description);
+            ping.Tags = tags;
             var pings = DB.GetCollection<Ping>("pings");
             pings.Insert(ping);
+            return ping;
         }
 
         public static void UpdatePing(Ping ping)
@@ -46,6 +50,20 @@ namespace Ping_Backend.Services
             var pings = DB.GetCollection<Ping>("pings");
             pings.Update(ping);
         }
+
+        public static void UpdatePingStatus(string id, string status)
+        {
+            var ping = GetPingById(id);
+            ping.Status = status;
+            UpdatePing(ping);
+        }
+
+        public static void InitialState()
+        {
+            DB.DropCollection("pings");
+            Init();
+        }
+
 
         public static void DeletePing(string id)
         {
@@ -55,17 +73,8 @@ namespace Ping_Backend.Services
 
         public static Ping GetPingById(string id)
         {
-            // Get customer collection
             var pings = DB.GetCollection<Ping>("pings");
-            var count = pings.Count(Query.All());
-            if (count == 0)
-            {
-                // Create your new customer instance
-                var demoData = DemoService.GetBaltimoreDemo();
-                pings.InsertBulk(demoData);
-            }
             return pings.FindById(id);
-
         }
     }
 }
