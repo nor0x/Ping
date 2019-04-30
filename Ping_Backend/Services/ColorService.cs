@@ -6,20 +6,20 @@ namespace Ping_Backend.Services
         public static string GetColorByRate(string rateString)
         {
             var rate = double.Parse(rateString.Replace(",", "."));
-
-            if (rate <= 2)
+            System.Diagnostics.Debug.WriteLine("rate is: " + rate);
+            if (rate <= 4)
             {
                 return "#23d160";
             }
-            else if(rate >= 2 && rate <= 6)
+            else if(rate >= 4 && rate < 5)
             {
                 return "#ffdd57";
             }
-            else if(rate >= 6 && rate <= 10)
+            else if(rate >= 5 && rate < 6)
             {
                 return "#d8750d";
             }
-            else if(rate >= 10)
+            else if(rate >= 6)
             {
                 return "#ff3860";
             }
