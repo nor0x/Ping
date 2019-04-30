@@ -22,5 +22,12 @@ namespace Ping_Backend.Controllers
             return HeatmapService.GetHeatmap(name);
         }
 
+        // GET api/heatmap
+        [HttpGet]
+        public IEnumerable<Heatmap> Get()
+        {
+            return HeatmapService.GetAllHeatmaps();
+        }
+
     }
 }

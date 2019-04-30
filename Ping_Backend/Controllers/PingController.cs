@@ -40,6 +40,14 @@ namespace Ping_Backend.Controllers
             DatabaseService.UpdatePing(value);
         }
 
+
+        // PUT api/ping/5
+        [HttpPut("{id}/{status}")]
+        public void ChangeStatus(string id, string status)
+        {
+            DatabaseService.UpdatePingStatus(id, status);
+        }
+
         // DELETE api/ping/5
         [HttpDelete("{id}")]
         public void Delete(string id)

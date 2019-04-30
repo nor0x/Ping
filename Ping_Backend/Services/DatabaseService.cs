@@ -51,6 +51,13 @@ namespace Ping_Backend.Services
             pings.Update(ping);
         }
 
+        public static void UpdatePingStatus(string id, string status)
+        {
+            var ping = GetPingById(id);
+            ping.Status = status;
+            UpdatePing(ping);
+        }
+
         public static void DeletePing(string id)
         {
             var pings = DB.GetCollection<Ping>("pings");

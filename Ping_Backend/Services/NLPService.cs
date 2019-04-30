@@ -36,9 +36,13 @@ namespace Ping_Backend.Services
 
             foreach(var e in entitiesResult.Documents.First().Entities)
             {
-                result.Add(e.Name);
+                if (e.Name.ToCharArray().Count() <= 30 && e.Name.ToCharArray().Count() >= 3)
+                {
+                    result.Add(e.Name);
+                }
             }
-            
+            result.RemoveAt(result.Count() - 1);
+
             return result;
         }
     }

@@ -19,45 +19,62 @@ namespace Ping_Backend.Services
 
         public static Heatmap GetHeatmap(string name)
         {
-            var states = System.IO.File.ReadAllText(@"./Data/states.json");
-            var data = JsonConvert.DeserializeObject<GeoJSON.Net.Feature.FeatureCollection>(states);
-            var first = data.Features.First();
-            object value;
-            IGeometryObject geometry = null;
-            foreach (var f in data.Features)
+            if (name.Contains(" ") == false)
             {
-                f.Properties.TryGetValue("NAME", out value);
-                if (value != null)
+                var states = System.IO.File.ReadAllText(@"./Data/states.json");
+                var data = JsonConvert.DeserializeObject<GeoJSON.Net.Feature.FeatureCollection>(states);
+                object value;
+                IGeometryObject geometry = null;
+                foreach (var f in data.Features)
                 {
-                    if (value.ToString().ToLower() == name.ToLower())
+                    f.Properties.TryGetValue("NAME", out value);
+                    if (value != null)
                     {
-                        geometry = f.Geometry;
-                        break;
+                        if (value.ToString().ToLower() == name.ToLower())
+                        {
+                            geometry = f.Geometry;
+                            break;
+                        }
                     }
                 }
-            }
-            if (geometry != null)
-            { 
-                if(geometry is MultiPolygon mp)
+                if (geometry != null)
                 {
-                    var result = new List<(double lat, double lng)>();
-                    var coordinates = mp.Coordinates.LastOrDefault().Coordinates.First().Coordinates;
-                    foreach(var c in coordinates)
+                    if (geometry is MultiPolygon mp)
                     {
-                        result.Add((c.Latitude, c.Longitude)); 
-                    }
-                    var resultMap = new Heatmap();
-                    resultMap.Bounds = result;
-                    var dataset = _unemploymentData.FirstOrDefault(u => u.AreaName.ToLower() == name.ToLower());
-                    if (dataset != null)
-                    {
-                        resultMap.Title = "Unemployment Rate in " + dataset.AreaName + " " + dataset.UnemploymentRate + "%";
-                        resultMap.Color = ColorService.GetColorByRate(dataset.UnemploymentRate);
-                        return resultMap;
+                        var result = new List<(double lat, double lng)>();
+                        var coordinates = mp.Coordinates.LastOrDefault().Coordinates.First().Coordinates;
+                        foreach (var c in coordinates)
+                        {
+                            result.Add((c.Latitude, c.Longitude));
+                        }
+                        var resultMap = new Heatmap();
+                        resultMap.Bounds = result;
+                        var dataset = _unemploymentData.FirstOrDefault(u => u.AreaName.ToLower() == name.ToLower());
+                        if (dataset != null)
+                        {
+                            resultMap.Title = "Unemployment Rate in " + dataset.AreaName + " " + dataset.UnemploymentRate + "%";
+                            resultMap.Color = ColorService.GetColorByRate(dataset.UnemploymentRate);
+                            return resultMap;
+                        }
                     }
                 }
             }
             return null;
+        }
+
+        public static List<Heatmap> GetAllHeatmaps()
+        {
+            var result = new List<Heatmap>();
+
+            foreach(var ud in _unemploymentData)
+            {
+                var h = GetHeatmap(ud.AreaName);
+                if(h != null)
+                {
+                    result.Add(h);
+                }
+            }
+            return result;
         }
     }
 }
