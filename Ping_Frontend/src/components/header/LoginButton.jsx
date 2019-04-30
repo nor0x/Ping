@@ -4,7 +4,12 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import "./LoginButton.css";
 
 export const LoginButton = ({ setUserStatus }) => {
-  const responseFacebook = () => {
+  const responseFacebook = response => {
+    console.log(response);
+    if (!response.status) {
+      console.log('Fail to login')
+      return
+    }
     console.log("login success");
     setUserStatus(true);
   };

@@ -23,18 +23,14 @@ export const MapContainer = compose(
   withScriptjs,
   withGoogleMap
 )(props => {
-  const {
-    pings,
-    currentIndex,
-    heatmapData,
-  } = props;
+  const { pings, currentIndex, heatmapData } = props;
   const targetPos = {
     lat: pings[currentIndex].latitude,
     lng: pings[currentIndex].longitude
   };
   let heatmapDatas;
 
-  if (heatmapData.length) {
+  if (heatmapData && heatmapData.length) {
     heatmapDatas = heatmapData;
   } else {
     heatmapDatas = [heatmapData];
