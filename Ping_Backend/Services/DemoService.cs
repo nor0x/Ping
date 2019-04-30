@@ -14,7 +14,7 @@ namespace Ping_Backend.Services
             var ping1 = new Ping
             {
                 Title = "Destruction of property",
-                Description = "12 cases of malicious damage to property were recorded. The protestors targeted fuel filling stations in particular areas.",
+                Description = "In the last days 12 cases of malicious damage or destructtion of property were recorded. The protestors targeted fuel filling stations in particular areas.",
                 Latitude = -18.879651,
                 Longitude = 29.659772,
                 Category = "Infrastructure",
@@ -39,7 +39,6 @@ namespace Ping_Backend.Services
             ping1.Tags = await NLPService.GetCategoriesFromTextAsync(ping1.Description);
             ping2.Tags = await NLPService.GetCategoriesFromTextAsync(ping2.Description);
             ping3.Tags = await NLPService.GetCategoriesFromTextAsync(ping3.Description);
-
             result.Add(ping1);
             result.Add(ping2);
             result.Add(ping3);
