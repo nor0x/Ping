@@ -6,12 +6,13 @@ import "./LoginButton.css";
 export const LoginButton = ({ setUserStatus }) => {
   const responseFacebook = response => {
     console.log(response);
-    setUserStatus(true);
-
-    if (response.status === undefined || response.status === "unknown") {
-      console.log("Fail to login");
-      setUserStatus(false);
+    if (response.accessToken) {
+      setUserStatus(true);
+      return
     }
+
+    console.log("Fail to login");
+    setUserStatus(false);
   };
 
   return (
