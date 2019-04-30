@@ -27,3 +27,7 @@
   background-color: #E3FDFD;
   padding: 0px 8px 1px 4px;
 }
+
+.dropdown-item {
+  margin: 2px;
+}

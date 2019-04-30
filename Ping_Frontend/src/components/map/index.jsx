@@ -29,17 +29,16 @@ export const MapContainer = compose(
     lat: pings[currentIndex].latitude,
     lng: pings[currentIndex].longitude
   };
-  const { bounds, color } = heatmapData
+  const { bounds, color } = heatmapData;
 
-  const heatmaps = bounds.map(
-    d => new google.maps.LatLng(d.item1, d.item2)
-  );
+  const heatmaps = bounds.map(d => new google.maps.LatLng(d.item1, d.item2));
 
   return (
     <GoogleMap
       defaultZoom={2}
       defaultCenter={{ lat: 37.33939, lng: -121.89496 }}
       ref={map => map && map.panTo(targetPos)}
+      // ref={map => map && map.panToBounds(heatmaps)}
       options={{
         streetViewControl: false,
         zoomControl: false,
@@ -65,7 +64,7 @@ export const MapContainer = compose(
           strokeColor: color || "#FF0000"
         }}
       />
-      <HeatmapLayer data={heatmaps} />
+      {/* <HeatmapLayer data={heatmaps} /> */}
     </GoogleMap>
   );
 });
